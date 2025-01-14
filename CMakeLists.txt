@@ -27,6 +27,7 @@ set(IMGUI_SRC
 )
 
 add_subdirectory(dep/glfw)
+add_subdirectory(dep/bullet3)
 
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR}/dep/inc)
@@ -83,6 +84,9 @@ add_executable(OpenGL_Template
         ${APP_SRC}
 )
 
+target_include_directories(OpenGL_Template PRIVATE
+    dep/bullet3/src
+)
 
 # Link libraries
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")             # macOS
@@ -115,5 +119,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")          # Linux
             -lXi
             -ldl
             assimp
+            BulletDynamics
+            BulletCollision
+            LinearMath
     )
 endif()

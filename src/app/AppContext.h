@@ -13,7 +13,7 @@
 #include "entity/light/PointLight.h"
 #include "entity/point/Point.h"
 #include "../opengl/model/Model.h"
-
+#include "btBulletDynamicsCommon.h"
 struct AppContext {
     AppContext() = default;
 
@@ -29,6 +29,14 @@ struct AppContext {
     std::unique_ptr<Point> lightBulb;
     std::unique_ptr<Quad> quad;
     std::unique_ptr<Model> bunny;
+
+    btDefaultCollisionConfiguration* collisionConfiguration;
+    btCollisionDispatcher* dispatcher;
+    btBroadphaseInterface* overlappingPairCache;
+    btSequentialImpulseConstraintSolver* solver;
+    btDiscreteDynamicsWorld* dynamicsWorld;
+
+    btAlignedObjectArray<btCollisionShape*> collisionShapes;
 };
 
 #endif //OPENGL_TEMPLATE_APPCONTEXT_H
